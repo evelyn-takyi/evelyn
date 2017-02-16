@@ -1,4 +1,4 @@
-# Oh Evelyn
+# Oh Sister evelyn
 
 #1 /bin/bash
 if [$# -eq 0 ]; then

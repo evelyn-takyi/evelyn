@@ -1,4 +1,4 @@
-# Oh Evelyn
+# Happy day
 
 #1 /bin/bash
 if [$# -eq 0 ]; then

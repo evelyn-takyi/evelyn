@@ -1,4 +1,4 @@
-hello everybody 
+hello everyone 
 sisters and brothers
 Be good to one another.
  

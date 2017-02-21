@@ -6,5 +6,5 @@ Be good to one another
 #1 /bin/bash
 if [$# -eq 0 ]; then
 	echo "Usage: $0 filename
-	exit 3
+	exit 2
 

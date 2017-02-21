@@ -1,4 +1,4 @@
-hello everyone, how are you today
+hello everyone, hope you all had a great day.
 sisters and brothers
 Be good to one another
 >>>>>>> 30140091cbf2755e73dd48b42976d20c203cbb32

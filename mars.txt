@@ -1,1 +1,13 @@
+<<<<<<< HEAD
 pleas make these changes
+=======
+#found it!
+cold and dry, but everything is my favorite color
+The two moons may be a problem for Wolfman
+But the mummy will appreciate the lack of humidity
+An ill-considered change
+maybe i should start with a base on Venus
+=======
+In this  weather which  cold and dry, everything is beautiful.
+Yes it is
+>>>>>>> 5b75e90a99d0b10e15406c9473a68a21c60eed1f

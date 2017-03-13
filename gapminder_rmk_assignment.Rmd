@@ -58,4 +58,16 @@ ggplot(GDP_Continent, aes(x =year, y = lifeExp, colour = continent)) +
   geom_line()
 ```
 
+```{r data plot}
+plotPopByContinent <- function(Popdata, ContinentToPlot){
+  gapminderContinent <- gapminder[gapminder$continent == ContinentToPlot,]
+  p <- ggplot(data = gapminderContinent,aes(x=year, y=pop)) + geom_point()
+  return(p)
+}
+```
+```{r}
+plotPopByContinent(gapminder, "Africa")
+```
+
+
 

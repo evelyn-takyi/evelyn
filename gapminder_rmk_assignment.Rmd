@@ -1,0 +1,61 @@
+---
+title: "gapminder data"
+author: "Evelyn Takyi"
+date: "March 1, 2017"
+output:
+  html_document: default
+  pdf_document: default
+---
+```{r echo=FALSE}
+library(ggplot2)
+library(plyr)
+library(curl)
+```
+
+
+
+# Load gapminder data changes
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(curl)
+gapminder_locations<-curl(url="https://raw.githubusercontent.com/resbaz/r-novice-gapminder-files/master/data/gapminder-FiveYearData.csv")
+gapminder<-read.csv(gapminder_locations)
+head(gapminder)
+```
+
+```{r }
+
+```
+
+
+
+
+# Structure  of the gapminder data
+```{r echo=FALSE}
+str(gapminder)
+
+```
+```{r}
+summary(gapminder)
+
+```
+# Total GDP by continent 
+## The plot below shows the total GDP of people in various continent of the world. Among the various continents, people in Africa show the least life Expectancy and Oceania shows the highest life Expectancy with respect to the years.
+```{r}
+GDP_Trend <- ddply(gapminder, ~country + year + continent, summarize, GDP = gdpPercap * pop, pop = pop)
+GDP_Continent <- ddply(GDP_Trend, ~year + continent, summarize, TotalGDP = sum(GDP), 
+  Totalpop = sum(pop))
+ggplot(GDP_Continent, aes(x =year, y = TotalGDP, colour = continent)) + geom_line()
+```
+
+
+
+# LifeExpectancy
+```{r}
+GDP_Trend <- ddply(gapminder, ~country + year + continent, summarize, lifeExp = lifeExp, pop = pop)
+GDP_Continent <- ddply(GDP_Trend, ~year + continent, summarize, lifeExp = mean(lifeExp),pop = mean(pop))
+ggplot(GDP_Continent, aes(x =year, y = lifeExp, colour = continent)) + 
+  geom_line()
+```
+
+

@@ -3,19 +3,22 @@ title: "gapminder data"
 author: "Evelyn Takyi"
 date: "March 1, 2017"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
-# Load gapminder data
+# Load gapminder data changes
 ```{r echo=FALSE}
-gapminder <- read.csv('gapminder-FiveYearData.csv')
+library(curl)
+gapminder_locations<-curl(url="https://raw.githubusercontent.com/resbaz/r-novice-gapminder-files/master/data/gapminder-FiveYearData.csv")
+gapminder<-read.csv(gapminder_locations)
 head(gapminder)
 ```
 
 ```{r echo=FALSE}
 library(ggplot2)
 library(dplyr)
+library(curl)
 ```
 
 
@@ -56,7 +59,7 @@ reg <- lm(lifeExp ~ gdpPercap, data=gapminder)
 summary(reg)
 
 ```
-
+# new
 ```{r}
 ggplot(gapminder, aes(x = year, y = lifeExp, group = country, width = 3.5, height = 2.5)) +
   geom_line(aes(colour = continent))  + facet_wrap(~ continent) +theme_classic()

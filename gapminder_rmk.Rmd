@@ -1,0 +1,73 @@
+---
+title: "gapminder data"
+author: "Evelyn Takyi"
+date: "March 1, 2017"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Load gapminder data
+```{r echo=FALSE}
+gapminder <- read.csv('gapminder-FiveYearData.csv')
+head(gapminder)
+```
+
+```{r echo=FALSE}
+library(ggplot2)
+library(dplyr)
+```
+
+
+
+
+# Structure  of the gapminder data
+```{r echo=FALSE}
+str(gapminder)
+
+```
+```{r}
+summary(gapminder)
+
+# Plots
+```{r Plot of lifeExp by gdpPercap to indicate any linear relationship between them}
+ggplot(gapminder, aes(x = gdpPercap, y = lifeExp, colour = continent)) +
+  geom_point()  + geom_smooth(method = 'lm') +
+ scale_x_log10() + geom_smooth(method = 'lm') 
+```
+
+
+```{r}
+ggplot(gapminder, aes(x = year, y = lifeExp, group = country, width = 3.5, height = 2.5)) +
+  geom_line(aes(colour = continent))
+```
+
+
+
+
+
+
+
+
+
+
+```{r}
+reg <- lm(lifeExp ~ gdpPercap, data=gapminder)
+summary(reg)
+
+```
+
+```{r}
+ggplot(gapminder, aes(x = year, y = lifeExp, group = country, width = 3.5, height = 2.5)) +
+  geom_line(aes(colour = continent))  + facet_wrap(~ continent) +theme_classic()
+```
+
+
+```{r}
+gre <- lm(lifeExp ~ year, data=gapminder)
+summary(gre)
+```
+
+
+
+

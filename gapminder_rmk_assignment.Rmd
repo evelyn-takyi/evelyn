@@ -40,22 +40,32 @@ summary(gapminder)
 
 ```
 # Total GDP by continent 
-## The plot below shows the total GDP of people in various continent of the world. Among the various continents, people in Africa show the least life Expectancy and Oceania shows the highest life Expectancy with respect to the years.
+## The plot below shows the total GDP of continent in the world. Among the various continents, oceania showed the least Gdp and America showed the highest Gdp with respect to the years. The  p-value is 2.2e-16 and the R-squared= 0.05112. This indicates a correlation between the gdp's of the continent and the year.
 ```{r}
 GDP_Trend <- ddply(gapminder, ~country + year + continent, summarize, GDP = gdpPercap * pop, pop = pop)
-GDP_Continent <- ddply(GDP_Trend, ~year + continent, summarize, TotalGDP = sum(GDP), 
-  Totalpop = sum(pop))
-ggplot(GDP_Continent, aes(x =year, y = TotalGDP, colour = continent)) + geom_line()
+GDP_Continent <- ddply(GDP_Trend, ~year + continent, summarize, TotalGDP = sum(GDP), Totalpop = sum(pop))
+ggplot(GDP_Continent, aes(x =year, y = TotalGDP, colour = continent)) + geom_line() 
+
+```
+
+```{r}
+lmmodel<- lm(year ~gdpPercap, data=gapminder)
+lmmodel
+summary(lmmodel)
 ```
 
 
 
 # LifeExpectancy
+## The plot below shows the mean life expectancy of people in various continent of the world. Among the various continents, people in Africa show the least life Expectancy and Oceania shows the highest life Expectancy with respect to the years. The P-value and R -squared shows a significant correlation between life expectancy of each continent and the years. 
 ```{r}
 GDP_Trend <- ddply(gapminder, ~country + year + continent, summarize, lifeExp = lifeExp, pop = pop)
-GDP_Continent <- ddply(GDP_Trend, ~year + continent, summarize, lifeExp = mean(lifeExp),pop = mean(pop), main = "Population of Countries in Africa by year") 
+GDP_Continent <- ddply(GDP_Trend, ~year + continent, summarize, lifeExp = mean(lifeExp),pop = mean(pop)
 ggplot(GDP_Continent, aes(x =year, y = lifeExp, colour = continent)) + 
 geom_line()  
+  geom_line()
+lmmodel1 <- lm(lifeExp ~year, data= gapminder)
+summary(lmmodel1)
 ```
 
 ```{r data plot}
@@ -69,10 +79,27 @@ plotPopByContinent <- function(Popdata, ContinentToPlot){
 plotPopByContinent(gapminder, "Africa")
 ```
 
+# Population and the year
+## The plot below shows the mean population from 1952 to 2007 of people in various continent of the world. The mean population of people in Asia is high compared to the rest of the continents.The P-value and R -squared shows no significant relationship  between population and the years of each continent and the years. 
+```{r}
+GDP_Trend <- ddply(gapminder, ~country + year + continent, summarize, pop = pop)
+GDP_Continent <- ddply(GDP_Trend, ~year + continent, summarize, pop = mean(pop))
+ggplot(GDP_Continent, aes(x =year, y = pop, colour = continent)) + 
+  geom_line()
+lmmodel2 <- lm(pop ~year, data= gapminder)
+summary(lmmodel2)
+```
 
 ```{r}
+<<<<<<< HEAD
 ggplot(gapminder[gapminder$continent=="Africa",], aes(x = year, y = lifeExp, group=country, main="use the title"))+
   geom_point()+ 
   geom_line()
+=======
+ggplot(gapminder, aes(x = gdpPercap, y = lifeExp, colour = continent,)) +
+  geom_point() +scale_x_log10()  +geom_smooth(method = 'lm') 
+ lmgra <- lm(lifeExp ~gdpPercap, data=gapminder)
+  summary(lmgra)
+>>>>>>> a6b66cf380e6b3ca3c7280cb283d6133de561768
 ```
 

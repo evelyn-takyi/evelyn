@@ -1,7 +1,7 @@
 ---
-title: "gapminder data"
+title: "Rmarkdown Assignment"
 author: "Evelyn Takyi, Vida Osei"
-date: "March 1, 2017"
+date: "March 13, 2017"
 output:
   html_document: default
   pdf_document: default
@@ -45,39 +45,37 @@ summary(gapminder)
 GDP_Trend <- ddply(gapminder, ~country + year + continent, summarize, GDP = gdpPercap * pop, pop = pop)
 GDP_Continent <- ddply(GDP_Trend, ~year + continent, summarize, TotalGDP = sum(GDP), Totalpop = sum(pop))
 ggplot(GDP_Continent, aes(x =year, y = TotalGDP, colour = continent)) + geom_line()+
-ggtitle("Total GDP by Continenet")
+ggtitle("TotalGDP vrs year")
 annotate("text", x = 1960, y = 1.5e+13, label = " r= 0.2 \nP = 2.2e-16")
-
 ```
 
 
 # The Mean LifeExpectancy by Countries
-### The plot below shows the mean life expectancy of people by countries from different continent. Canada and Mexico hve high Life expectancies. That of Kenya has been increasing over the years but has been decreasing in the 1990's. Life expectancy of Cambodia was very low but has been increasing in recent years.
+### The plot below shows the mean life expectancy of people by countries from different continent. Canada and Mexico have high Life expectancies. That of Kenya has been increasing over the years but decreases in the 1990's and increased in 2000s. Life expectancy of Cambodia is the least among the countries and decreased drastically between 1970 and 1980 and increa.sed steadily from 1980 to 2007.
 ```{r echo=FALSE}
 Countries_bar <- c("Canada", "Kenya", "Cambodia", "Mexico")
 ggplot(subset(gapminder, country %in% Countries_bar), aes(x = year, y = lifeExp, color = country))+ 
   geom_line()+ 
   geom_point()+
-  ggtitle("Life Expectancy of Countries")
+  ggtitle("Life Expectancy vrs year")
 ```
 
-
-# Population and the year
-### The plot below shows the mean population from 1952 to 2007 of people in various continent of the world. The mean population of Asia is high and has been increasing over the years. Population of the other continents is low and with gradual increment in recent years compared to Asia. The P-value and R -squared values shows significant relationship  between population and the years of each continent and the years. 
+#Population  and year
+##The plot below shows the mean population  from 1952 to 2007 of people in various continent of the world. The mean population of Asia is high and has been increasing over the years. Population of the other continents is low compared to Asia with gradual increment in recent years. The P-value and R -squared values shows significant relationship  between population and the years of each continent and the years. 
 ```{r echo=FALSE}
 GDP_Trend <- ddply(gapminder, ~country + year + continent, summarize, pop = pop)
 GDP_Continent <- ddply(GDP_Trend, ~year + continent, summarize, pop = mean(pop))
 ggplot(GDP_Continent, aes(x =year, y = pop, colour = continent)) + 
   geom_line()+
-  ggtitle("Population of Continents")+annotate("text", x = 1960, y = 1.0e+08, label = " r= 0.08 \nP < 0.005")
+  ggtitle("Population  vrs year")+annotate("text", x = 1960, y = 1.0e+08, label = " r= 0.08 \nP < 0.005")
 ```
 
 
 #Graph of Life Expectancy and Population by Continent
-### The graph below shows population of the continents and their life expectancies. r and p values shows there is no relationship or correlation between these variables.
+### The graph below shows population of the continents and their life expectancies. r and p values indicates there is no relationship or correlation between these variables.
 ```{r echo=FALSE}
 ggplot(gapminder, aes(x = pop, y = lifeExp, colour = continent,)) +
   geom_point() +scale_x_log10()  +geom_smooth(method = 'lm')+
-  ggtitle("Life Expectancy vrs Population by Continent")+annotate("text", x = 1e+05, y = 80, label = " r= 0.06 \nP > 0.007")
+  ggtitle("Life Expectancy vrs Population")+annotate("text", x = 1e+05, y = 80, label = " r= 0.06 \nP > 0.007")
 ```
 

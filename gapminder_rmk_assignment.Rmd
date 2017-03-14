@@ -53,9 +53,9 @@ ggplot(GDP_Continent, aes(x =year, y = TotalGDP, colour = continent)) + geom_lin
 # LifeExpectancy
 ```{r}
 GDP_Trend <- ddply(gapminder, ~country + year + continent, summarize, lifeExp = lifeExp, pop = pop)
-GDP_Continent <- ddply(GDP_Trend, ~year + continent, summarize, lifeExp = mean(lifeExp),pop = mean(pop))
+GDP_Continent <- ddply(GDP_Trend, ~year + continent, summarize, lifeExp = mean(lifeExp),pop = mean(pop), main = "Population of Countries in Africa by year") 
 ggplot(GDP_Continent, aes(x =year, y = lifeExp, colour = continent)) + 
-  geom_line()
+geom_line()  
 ```
 
 ```{r data plot}
@@ -63,11 +63,16 @@ plotPopByContinent <- function(Popdata, ContinentToPlot){
   gapminderContinent <- gapminder[gapminder$continent == ContinentToPlot,]
   p <- ggplot(data = gapminderContinent,aes(x=year, y=pop)) + geom_point()
   return(p)
-}
+  
 ```
 ```{r}
 plotPopByContinent(gapminder, "Africa")
 ```
 
 
+```{r}
+ggplot(gapminder[gapminder$continent=="Africa",], aes(x = year, y = lifeExp, group=country, main="use the title"))+
+  geom_point()+ 
+  geom_line()
+```
 
